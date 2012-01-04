@@ -1,0 +1,46 @@
+#app
+  .row.header
+    .columns.span8.offset1
+      .page-header
+        h1
+          ' 100の目標
+          small one hundred goal
+        
+  .row
+    .columns.span16.offset1
+      .input-prepend.hanging.no-result
+        input.xxlarge.title#new-goal name='title-input' type='text' placeholder='input goal...'
+  
+  .row.goal-header
+    .colomns.span16.offset1
+      span.span7.first-col 目標
+      span.span3 グループ
+      span.span3 期限
+  .row
+    .goallistbox
+      ul#goal-list
+      
+  .row
+    .columns.offset1
+      h4.line-count
+        span#count-wrapper.hidden
+          span.count#count 0
+          |/100
+      span.goal-clear
+        a href='#' clear completed Item
+
+script type='text/template' id='item-template'
+  .goalitem
+    .display
+      input.check type='checkbox'
+      .goal-text.span7.left __goaltitle__
+      .goal-text.span3.left __group__
+      .goal-text.span3.left __term__
+      .clear
+      span.goal-destroy x
+    .edit
+      input.xxlarge.span7.goal-input type='text' value='__goaltitle__'
+      input.xxlarge.span3.goal-group-input type='text' value='__group__'
+      input.xxlarge.span3.goal-term-input type='text' value='__term__'
+      button.btn#cancel Cancel
+

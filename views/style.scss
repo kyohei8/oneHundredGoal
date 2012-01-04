@@ -1,0 +1,115 @@
+
+$monospace-stack: "Menlo", Courier New, monospace;
+$termgroup-input-width: 125px;
+$termgroup-input-margin: 0 5px;
+ol, ul {
+  list-style: none;
+}
+
+.goal-header{
+  height:0px;
+  font-size:18px;
+  .first-col{
+    margin-left: 46px;
+  }
+}
+
+.goallistbox{
+  margin-left: 55px;
+  width:900px;
+}
+
+.xxlarge {
+  padding-bottom: 2px;
+  padding-left: 5px;
+  color: #404040;
+  height: 30px;
+  font-size: 18px;
+  
+  &.title { 
+    font-weight: bold;
+    height: 36px;
+    font-size: 24px;
+  }
+  &.goal-input{
+    margin-right:5px;
+    margin-left: 40px;
+  }
+  &.goal-term-input{
+    margin:$termgroup-input-margin;
+  }
+  &.goal-group-input{
+    margin:$termgroup-input-margin;
+  }
+}
+
+.btn{
+  width: 50px;
+  padding-left: 3px;
+  padding-right: 3px;
+  height: 38px;
+  margin-bottom: -5px;
+}
+
+#goal-list{
+  
+  .check {
+    position: relative;
+    top: 9px;
+    margin: 0 10px 0 7px;
+    float: left;
+  }
+  
+  li {
+    padding: 12px 0px 11px 0;
+    position: relative;
+    font-size: 24px;
+    line-height: 1.1em;
+    border-bottom: 1px solid #CCC;
+  }
+  
+  .goal-destroy {
+    position: absolute;
+    right: 5px;
+    top: 14px;
+    display: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+  
+  
+  li:hover .goal-destroy {
+    display: block;
+  }
+  
+  .editing .edit {
+    display: block;
+  }
+  
+  .goal-text{
+    word-wrap: break-word;
+    .left{
+      float:left;
+    }
+  }
+  
+  .clear{
+    clear:both;
+  }
+  
+  .done .goal-text {
+    text-decoration: line-through;
+    color: #777777;
+  }
+  
+}
+
+
+#goal-list .editing .display, #goal-list .edit {
+  display: none;
+}
+    
+.hidden {
+  display: none;
+}
