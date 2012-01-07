@@ -5,11 +5,32 @@
         h1
           ' 100の目標
           small one hundred goal
+    .columns.span1.description-title
+      a#description href="#" 説明
+  
+  .row
+    .columns.span11.offset1.alert-message.block-message.warning.fade.in data-alert="alert" style="display:none"
+      a.close href="#" x
+      a href="http://www.shinoby.net/2012/01/100-2.html" target="_blank" 「今年やるべき100のリスト」
+      |をみて作ってみました。
+      ul.description
+        li
+          a href="http://localtodos.com/" Todos
+          |（
+          a href="http://documentcloud.github.com/backbone/docs/todos.html" 解説
+          |）をベースに作ってみた
+        li sinatraとbackbone.js,CoffeeScript,sass,slimの練習
+        li DBは使っておらず、localstrage(ブラウザ)に保存されるだけなので好きなだけ書きなぐってください
         
   .row
-    .columns.span16.offset1
+    .columns.span11.offset1
       .input-prepend.hanging.no-result
         input.xxlarge.title#new-goal name='title-input' type='text' placeholder='input goal...'
+    .columns.span2
+      h2.line-count
+        span#count-wrapper.hidden
+          span.count#count 0
+          |/100
   
   .row.goal-header
     .colomns.span16.offset1
@@ -21,11 +42,7 @@
       ul#goal-list
       
   .row
-    .columns.offset1
-      h4.line-count
-        span#count-wrapper.hidden
-          span.count#count 0
-          |/100
+    .colomns.span16.offset1
       span.goal-clear
         a href='#' clear completed Item
 
@@ -40,7 +57,7 @@ script type='text/template' id='item-template'
       span.goal-destroy x
     .edit
       input.xxlarge.span7.goal-input type='text' value='__goaltitle__'
-      input.xxlarge.span3.goal-group-input type='text' value='__group__'
-      input.xxlarge.span3.goal-term-input type='text' value='__term__'
+      input.xxlarge.span3.goal-group-input type='text' autocomplete='off' value='__group__'
+      input.xxlarge.span3.goal-term-input type='text' autocomplete='off' value='__term__'
       button.btn#cancel Cancel
 

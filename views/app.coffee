@@ -6,7 +6,6 @@ Router = Backbone.Router.extend
     '': 'new'
   new: ->
     new AppView
-    console.log 'kusole'
 
 #
 # Goal Model
@@ -14,8 +13,8 @@ Router = Backbone.Router.extend
 GoalModel = Backbone.Model.extend
   defaults: ->
     goaltitle: ''
-    group: '...'
-    term: '...'
+    group: ''
+    term: ''
     done: false
     order: Goals.nextOrder()
 
@@ -63,7 +62,6 @@ Goals = new GoalList
 #
 GoalView = Backbone.View.extend
   tagName: 'li'
-  omission: '...'
   # cache
   template: _.template($('#item-template').html())
   # items event 
@@ -75,6 +73,8 @@ GoalView = Backbone.View.extend
     'keypress .goal-group-input': 'updateOnEnter'
     'keypress .goal-term-input' : 'updateOnEnter'
     'click #cancel'             : 'cancel'
+    'focus .goal-group-input'   : 'suggestGroup'
+    'focus .goal-term-input'    : 'suggestTerm'
   
   # change to model to rerender
   initialize: ->
@@ -102,15 +102,13 @@ GoalView = Backbone.View.extend
   
   edit: ->
     $(@el).addClass("editing")
-    @inputGroup.val('') if(@inputGroup.val() is @omission)
-    @inputTerm.val('') if(@inputTerm.val() is @omission)
     @input.focus()
     
   close: ->
     @model.save(
       goaltitle: @input.val()
-      group    : if(@inputGroup.val() isnt '') then @inputGroup.val() else @omission
-      term     : if(@inputTerm.val() isnt '') then @inputTerm.val() else @omission
+      group    : @inputGroup.val()
+      term     : @inputTerm.val()
     )
     $(@el).removeClass("editing");
   
@@ -127,7 +125,14 @@ GoalView = Backbone.View.extend
   remove: ->
     $(@el).remove()
   
-  
+  suggestGroup: ->
+    groups = _.without(_.uniq(Goals.pluck('group')),"")
+    $(".goal-group-input").autocomplete(groups)
+    
+  suggestTerm: ->
+    terms = _.without(_.uniq(Goals.pluck('term')),"")
+    $(".goal-term-input").autocomplete(terms)
+
 
 #
 # Application
@@ -137,9 +142,11 @@ AppView = Backbone.View.extend
   #statsTemplate: _.template($('#stats-template').html())
   events:
     'keypress #new-goal':'createOnEnter'
-    'keyup #new-goal':'showTooltip'
-    'click .goal-clear':'clearCompleted'
-  
+    'keyup #new-goal'   :'showTooltip'
+    'click .goal-clear' :'clearCompleted'
+    'click #description':'openDescription'
+    'click .close':'closeDescription'
+    
   initialize: ->
     @input = @$("#new-goal")
     Goals.bind 'add', @addOne, @    
@@ -179,7 +186,6 @@ AppView = Backbone.View.extend
 
   
   clearCompleted: ->
-    console.log 'clearCompleted'
     _.each Goals.done(), (goal) =>
       goal.destroy()
       true
@@ -195,7 +201,13 @@ AppView = Backbone.View.extend
       tooltip.show().fadeIn()
     @tooltipTimeout = _.delay(show,1000)
     true
-
+  
+  openDescription:()->
+    $(".alert-message").show()
+    
+  closeDescription:()->
+    $(".alert-message").hide()
+    
 $ ->
   App.Router = new Router()
   Backbone.history.start()

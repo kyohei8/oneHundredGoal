@@ -2,8 +2,18 @@
 $monospace-stack: "Menlo", Courier New, monospace;
 $termgroup-input-width: 125px;
 $termgroup-input-margin: 0 5px;
-ol, ul {
-  list-style: none;
+
+.header{
+  margin-top:10px;
+  margin-bottom:0px;
+  
+  .description-title{
+   margin-top:20px; 
+  }
+}
+
+ul.description{
+  margin-bottom:0px;
 }
 
 .goal-header{
@@ -50,6 +60,11 @@ ol, ul {
   height: 38px;
   margin-bottom: -5px;
 }
+.goallistbox{
+  ol, ul {
+    list-style: none;
+  }
+}
 
 #goal-list{
   
@@ -89,6 +104,7 @@ ol, ul {
   
   .goal-text{
     word-wrap: break-word;
+    height: 26px;
     .left{
       float:left;
     }
@@ -112,4 +128,12 @@ ol, ul {
     
 .hidden {
   display: none;
+}
+
+/*
+ * suggest style  
+ */
+.ac_results li {
+  padding: 5px;
+  font-size: 15px;
 }
