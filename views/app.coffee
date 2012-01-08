@@ -1,6 +1,3 @@
-# TODO desription link => target _blank
-# TODO alert clearLink
-
 _.templateSettings = { interpolate: /__(.+?)__/g }
   
 App = {}
