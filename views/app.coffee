@@ -53,7 +53,13 @@ GoalList = Backbone.Collection.extend
   #sort 
   comparator:(goal) ->
     return goal.get('order')
-
+    
+  renumbering: ->
+    idx = 1
+    _.each @toArray() , (goal) =>
+      goal.save(order:idx)
+      idx++
+      
 # collection of global
 Goals = new GoalList
 
@@ -134,6 +140,7 @@ GoalView = Backbone.View.extend
     
   remove: ->
     $(@el).remove()
+    
   
   suggestGroup: ->
     groups = _.without(_.uniq(Goals.pluck('group')),"")
@@ -142,6 +149,7 @@ GoalView = Backbone.View.extend
   suggestTerm: ->
     terms = _.without(_.uniq(Goals.pluck('term')),"")
     $(".goal-term-input").autocomplete(terms)
+    
 
 
 #
@@ -200,6 +208,7 @@ AppView = Backbone.View.extend
     _.each Goals.done(), (goal) =>
       goal.destroy()
       true
+    Goals.renumbering()
     false
   
   clearGoals: ->
