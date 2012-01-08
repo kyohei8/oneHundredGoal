@@ -18,21 +18,21 @@
           a href="http://localtodos.com/" Todos
           |（
           a href="http://documentcloud.github.com/backbone/docs/todos.html" 解説
-          |）をベースに作ってみた
+          |）をベースに作ってみた（と言うかパクリ）
         li sinatraとbackbone.js,CoffeeScript,sass,slimの練習
         li DBは使っておらず、localstrage(ブラウザ)に保存されるだけなので好きなだけ書きなぐってください
         
   .row
     .columns.span11.offset1
       .input-prepend.hanging.no-result
-        input.xxlarge.title#new-goal name='title-input' type='text' placeholder='input goal...'
+        input.xxlarge.title#new-goal name='title-input' type='text' placeholder='目標を入力'
     .columns.span2
       h2.line-count
         span#count-wrapper.hidden
           span.count#count 0
           |/100
   
-  .row.goal-header
+  .row.goal-header.hidden
     .colomns.span16.offset1
       span.span7.first-col 目標
       span.span3 グループ
@@ -42,17 +42,21 @@
       ul#goal-list
       
   .row
-    .colomns.span16.offset1
-      span.goal-clear
-        a href='#' clear completed Item
+    .colomns.span8.offset1.goal-clear.hidden
+      span.goal-comp-clear
+        a href='#' 完了したものをクリア
+        ' &nbsp;&nbsp;|&nbsp;&nbsp; 
+      span.goal-all-clear
+        a href='#' 全てクリア
 
 script type='text/template' id='item-template'
   .goalitem
     .display
-      input.check type='checkbox'
-      .goal-text.span7.left __goaltitle__
-      .goal-text.span3.left __group__
-      .goal-text.span3.left __term__
+      input.check type='checkbox' 
+      span.index.left __order__ 
+      .goal-text.span7.left.goal-title __goaltitle__
+      .goal-text.span3.left.goal-group __group__
+      .goal-text.span3.left.goal-term __term__
       .clear
       span.goal-destroy x
     .edit

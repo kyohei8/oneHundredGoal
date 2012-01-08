@@ -67,7 +67,9 @@ GoalView = Backbone.View.extend
   # items event 
   events:
     'click .check'              : 'toggleDone'
-    'dblclick div.goal-text'    : 'edit'
+    'dblclick div.goal-title'   : 'editTitle'
+    'dblclick div.goal-group'   : 'editGroup'
+    'dblclick div.goal-term'    : 'editTerm'
     'click span.goal-destroy'   : 'clear'
     'keypress .goal-input'      : 'updateOnEnter'
     'keypress .goal-group-input': 'updateOnEnter'
@@ -100,9 +102,17 @@ GoalView = Backbone.View.extend
   toggleDone: ->
     @model.toggle()
   
-  edit: ->
+  editTitle: ->
     $(@el).addClass("editing")
     @input.focus()
+    
+  editGroup: ->
+    $(@el).addClass("editing")
+    @inputGroup.focus()
+    
+  editTerm: ->
+    $(@el).addClass("editing")
+    @inputTerm.focus()
     
   close: ->
     @model.save(
@@ -139,13 +149,13 @@ GoalView = Backbone.View.extend
 #
 AppView = Backbone.View.extend
   el: $("#app")
-  #statsTemplate: _.template($('#stats-template').html())
   events:
-    'keypress #new-goal':'createOnEnter'
-    'keyup #new-goal'   :'showTooltip'
-    'click .goal-clear' :'clearCompleted'
-    'click #description':'openDescription'
-    'click .close':'closeDescription'
+    'keypress #new-goal'     :'createOnEnter'
+    'keyup #new-goal'        :'showTooltip'
+    'click .goal-comp-clear' :'clearCompleted'
+    'click .goal-all-clear'  :'clearGoals'
+    'click #description'     :'openDescription'
+    'click .close'           :'closeDescription'
     
   initialize: ->
     @input = @$("#new-goal")
@@ -162,6 +172,7 @@ AppView = Backbone.View.extend
     @$('#count').text(size)
     @$('#count-wrapper').toggle(size > 0)
     @$('.goal-header').toggle(size > 0)    
+    @$('.goal-clear').toggle(size > 0)    
     @
     
   
@@ -191,6 +202,12 @@ AppView = Backbone.View.extend
       true
     false
   
+  clearGoals: ->
+    _.each Goals.toArray(), (goal) =>
+      goal.destroy()
+      true
+    false
+  
   showTooltip: (e) ->
     tooltip = @$(".ui-tooltip-top")
     val = @input.val()
@@ -211,3 +228,4 @@ AppView = Backbone.View.extend
 $ ->
   App.Router = new Router()
   Backbone.history.start()
+

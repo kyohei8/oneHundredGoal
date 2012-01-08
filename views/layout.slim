@@ -9,6 +9,6 @@ html
       /indexが挿入される
       == yield 
       /他のJavascriptファイルを読み込む
-      - ['jquery-1.6.3.min', 'bootstrap-alerts', 'json2', 'underscore-min', 'backbone-min', 'backbone.localStorage-min', 'coffee-script', 'processing-1.3.0.min', 'jquery.autocomplete.min', 'app'].each do |filename|
+      - ['jquery-1.6.3.min', 'json2', 'underscore-min', 'backbone-min', 'backbone.localStorage-min', 'coffee-script', 'processing-1.3.0.min', 'jquery.autocomplete.min', 'app'].each do |filename|
         script src='/javascripts/#{filename}.js' type='text/javascript'
 
