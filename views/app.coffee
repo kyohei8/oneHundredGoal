@@ -1,3 +1,6 @@
+# TODO desription link => target _blank
+# TODO alert clearLink
+
 _.templateSettings = { interpolate: /__(.+?)__/g }
   
 App = {}
@@ -205,16 +208,18 @@ AppView = Backbone.View.extend
 
   
   clearCompleted: ->
-    _.each Goals.done(), (goal) =>
-      goal.destroy()
-      true
-    Goals.renumbering()
+    if window.confirm "clear completed?"
+      _.each Goals.done(), (goal) =>
+        goal.destroy()
+        true
+      Goals.renumbering()
     false
   
   clearGoals: ->
-    _.each Goals.toArray(), (goal) =>
-      goal.destroy()
-      true
+    if window.confirm "clear all item?"
+      _.each Goals.toArray(), (goal) =>
+        goal.destroy()
+        true
     false
   
   showTooltip: (e) ->

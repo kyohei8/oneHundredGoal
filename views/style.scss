@@ -2,6 +2,12 @@
 $monospace-stack: "Menlo", Courier New, monospace;
 $termgroup-input-width: 120px;
 $termgroup-input-margin: 0 5px;
+input::-webkit-input-placeholder {
+    color:    #CCC;
+}
+input:-moz-placeholder {
+    color:    #CCC;
+}
 
 .header{
   margin-top:10px;
